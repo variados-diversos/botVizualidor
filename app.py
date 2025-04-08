@@ -7,9 +7,13 @@ import pyautogui
 import random
 import time
 import platform
-import requests
 from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
 import zipfile
+import tempfile
+import shutil
+
+# Cria uma pasta temporária
+user_data_dir = tempfile.mkdtemp()
 
 while True:
     # Suas credenciais Luna Proxy
@@ -81,7 +85,7 @@ while True:
     # Configura o Chrome com a extensão
     chrome_options = Options()
     chrome_options.add_extension(plugin_path)
-    
+    chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
     # (opcional) emulação de mobile
     disposivito = random.randint(1, 3)
 
@@ -105,10 +109,12 @@ while True:
     except:
         print("Nenhum modal de login visível.")
         driver.quit()
+        shutil.rmtree(user_data_dir)
         continue  # reinicia o while True
         
 
     time.sleep(2)
+
 
     #bt saiba mais
     try:
@@ -159,10 +165,10 @@ while True:
     # Salva abas antes dos cliques aleatórios
     abas_antes = set(driver.window_handles)
 
-
-
     clica = random.randint(1,4)
+    print
     if clica == 1:
+        
         # Scroll para cima + clique aleatório por 8 vezes
         for _ in range(15):
             abas_atuais = set(driver.window_handles)
@@ -203,3 +209,4 @@ while True:
     
     time.sleep(2)
     driver.quit()
+    shutil.rmtree(user_data_dir)
