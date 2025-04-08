@@ -165,7 +165,7 @@ while True:
     # Salva abas antes dos cliques aleatórios
     abas_antes = set(driver.window_handles)
 
-    clica = random.randint(1,4)
+    clica = random.randint(1,1)
     print
     if clica == 1:
         
@@ -198,14 +198,14 @@ while True:
             pyautogui.hotkey('ctrl', 'w')
         print("Aba atual fechada.")
 
+    if driver.window_handles:
+        for _ in range(5):
+            driver.execute_script(f"window.scrollBy(0, 100);")  # scroll para baixo
+            time.sleep(0.2)
 
-    for _ in range(5):
-        driver.execute_script(f"window.scrollBy(0, 100);")  # scroll para baixo
-        time.sleep(0.2)
-
-    for _ in range(5):
-        driver.execute_script(f"window.scrollBy(0, -100);")  # scroll para baixo
-        time.sleep(0.2)    
+        for _ in range(5):
+            driver.execute_script(f"window.scrollBy(0, -100);")  # scroll para baixo
+            time.sleep(0.2)    
     
     time.sleep(2)
     driver.quit()
