@@ -165,7 +165,7 @@ while True:
     # Salva abas antes dos cliques aleatórios
     abas_antes = set(driver.window_handles)
 
-    clica = random.randint(1,1)
+    clica = random.randint(1,3)
     print
     if clica == 1:
         
