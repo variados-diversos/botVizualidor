@@ -139,7 +139,9 @@ while True:
 
     except Exception as e:
         print("Botão 'Saiba mais' não encontrado.")
-        print(e)
+        driver.quit()
+        shutil.rmtree(user_data_dir)
+        continue  # reinicia o while True
 
     # Aguarda a nova aba abrir
     time.sleep(3)
@@ -158,7 +160,8 @@ while True:
 
     # Faz scroll na página
     for _ in range(15):
-        driver.execute_script("window.scrollBy(0, 100);")  # scroll para baixo
+        if driver.window_handles:
+            driver.execute_script("window.scrollBy(0, 100);")  # scroll para baixo
         time.sleep(0.5)
 
 
@@ -177,7 +180,8 @@ while True:
                 break
             # Scroll para cima
             scroll_amount = random.randint(50, 300)
-            driver.execute_script(f"window.scrollBy(0, -{scroll_amount});")
+            if driver.window_handles:
+                driver.execute_script(f"window.scrollBy(0, -{scroll_amount});")
             time.sleep(0.5)
 
             # Gera coordenadas aleatórias dentro de um quadrado 100x100
@@ -198,13 +202,15 @@ while True:
             pyautogui.hotkey('ctrl', 'w')
         print("Aba atual fechada.")
 
-    if driver.window_handles:
+    
         for _ in range(5):
-            driver.execute_script(f"window.scrollBy(0, 100);")  # scroll para baixo
+            if driver.window_handles:
+                driver.execute_script(f"window.scrollBy(0, 100);")  # scroll para baixo
             time.sleep(0.2)
 
         for _ in range(5):
-            driver.execute_script(f"window.scrollBy(0, -100);")  # scroll para baixo
+            if driver.window_handles:
+                driver.execute_script(f"window.scrollBy(0, -100);")  # scroll para baixo
             time.sleep(0.2)    
     
     time.sleep(2)
