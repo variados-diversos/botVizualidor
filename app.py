@@ -91,33 +91,14 @@ while True:
         disposivito = random.randint(1, 3)
 
         if disposivito != 1:
-            tipo_dispositivo = random.randint(1, 10)
-            if tipo_dispositivo == 1:
-                mobile_emulation = {"deviceName": "iPhone 11"}
-            if tipo_dispositivo == 2:
-                mobile_emulation = {"deviceName": "Samsung Galaxy S5"}
-            if tipo_dispositivo == 3:
-                mobile_emulation = {"deviceName": "iPhone X"}
-            if tipo_dispositivo == 4:
-                mobile_emulation = {"deviceName": "Google Pixel"}
-            if tipo_dispositivo == 5:
-                mobile_emulation = {"deviceName": "Samsung Galaxy S20"}
-            if tipo_dispositivo == 6:
-                mobile_emulation = {"deviceName": "OnePlus 7"}
-            if tipo_dispositivo == 7:
-                mobile_emulation = {"deviceName": "Xiaomi Redmi Note 8"}
-            if tipo_dispositivo == 8:
-                mobile_emulation = {"deviceName": "Huawei P30"}
-            if tipo_dispositivo == 9:
-                mobile_emulation = {"deviceName": "Google Pixel 4a"}
-            if tipo_dispositivo == 10:
-                mobile_emulation = {"deviceName": "iPhone 12"}
+            mobile_emulation = {"deviceName": "iPhone X"}
 
             print("Dispositivo: " + mobile_emulation["deviceName"])
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+        else :
+            print("Dispositivo: Desktop")
 
         # Inicia o driver
-        print("Dispositivo: Desktop")
         driver = webdriver.Chrome(options=chrome_options)  
         driver.set_window_size(400, 800)
         
