@@ -91,13 +91,36 @@ while True:
         disposivito = random.randint(1, 3)
 
         if disposivito != 1:
-            mobile_emulation = {"deviceName": "iPhone X"}
+            tipo_dispositivo = random.randint(1, 10)
+            if tipo_dispositivo == 1:
+                mobile_emulation = {"deviceName": "iPhone 11"}
+            if tipo_dispositivo == 2:
+                mobile_emulation = {"deviceName": "Samsung Galaxy S5"}
+            if tipo_dispositivo == 3:
+                mobile_emulation = {"deviceName": "iPhone X"}
+            if tipo_dispositivo == 4:
+                mobile_emulation = {"deviceName": "Google Pixel"}
+            if tipo_dispositivo == 5:
+                mobile_emulation = {"deviceName": "Samsung Galaxy S20"}
+            if tipo_dispositivo == 6:
+                mobile_emulation = {"deviceName": "OnePlus 7"}
+            if tipo_dispositivo == 7:
+                mobile_emulation = {"deviceName": "Xiaomi Redmi Note 8"}
+            if tipo_dispositivo == 8:
+                mobile_emulation = {"deviceName": "Huawei P30"}
+            if tipo_dispositivo == 9:
+                mobile_emulation = {"deviceName": "Google Pixel 4a"}
+            if tipo_dispositivo == 10:
+                mobile_emulation = {"deviceName": "iPhone 12"}
+
+            print("Dispositivo: " + mobile_emulation["deviceName"])
             chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
         # Inicia o driver
+        print("Dispositivo: Desktop")
         driver = webdriver.Chrome(options=chrome_options)  
         driver.set_window_size(400, 800)
-
+        
         # Access the post URL
         driver.get("https://www.facebook.com/61566807274239/posts/122147574176560242/")
 
@@ -114,7 +137,7 @@ while True:
             continue  # reinicia o while True
             
 
-        time.sleep(2)
+        time.sleep(1)
 
 
         #bt saiba mais
@@ -145,7 +168,7 @@ while True:
             continue  # reinicia o while True
 
         # Aguarda a nova aba abrir
-        time.sleep(3)
+        time.sleep(1)
         abas = driver.window_handles
         if len(abas) > 1:
             driver.switch_to.window(abas[-1])  # Foca na nova aba
@@ -169,10 +192,8 @@ while True:
         # Salva abas antes dos cliques aleatórios
         abas_antes = set(driver.window_handles)
 
-        clica = random.randint(1,3)
-        print
+        clica = random.randint(1,2)
         if clica == 1:
-            
             # Scroll para cima + clique aleatório por 8 vezes
             for _ in range(15):
                 abas_atuais = set(driver.window_handles)
@@ -214,7 +235,7 @@ while True:
                     driver.execute_script(f"window.scrollBy(0, -100);")  # scroll para baixo
                 time.sleep(0.2)    
         
-        time.sleep(2)
+        time.sleep(1)
         driver.quit()
         shutil.rmtree(user_data_dir)
     except Exception as e:
@@ -234,4 +255,4 @@ while True:
             pass
 
         print("\n🔁 Reiniciando o processo...\n")
-        time.sleep(2)
+        time.sleep(1)
