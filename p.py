@@ -1,192 +1,179 @@
-import threading
-import time
-import random
-import shutil
-import tempfile
-import platform
-import zipfile
-import pyautogui
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+import pyautogui
+import random
+import time
+from seleniumwire import webdriver
+import threading
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import shutil
+from selenium.webdriver.common.action_chains import ActionChains
 
-# Lock para controlar acesso ao mouse
-mouse_lock = threading.Lock()
+while True:
+    try: 
+        proxy_user = "user-jungjunior25_P2mgO"
+        proxy_pass = "Resgate27"
+        proxy_host = "na.wq08cilx.lunaproxy.net"
+        proxy_port = 12233
 
-# Lista de proxies diferentes para 4 janelas
-proxies = [
-    ("na.wq08cilx.lunaproxy.net", 12233, "user-jungjunior25_P2mgO", "Resgate27"),
-    ("na.wq08cilx.lunaproxy.net", 12233, "jungrogerio_S5uwF", "Resgate27"),
-    ("na.wq08cilx.lunaproxy.net", 12233, "user-rogeriojung_A0isB", "Resgate27"),
-    ("na.wq08cilx.lunaproxy.net", 12233, "user-juniorjung_N3nzV", "Resgate27"),
-]
-
-def criar_extensao_proxy(proxy_host, proxy_port, proxy_user, proxy_pass):
-    manifest_json = """
-    {
-        "version": "1.0.0",
-        "manifest_version": 2,
-        "name": "Luna Proxy Auth Extension",
-        "permissions": [
-            "proxy",
-            "tabs",
-            "unlimitedStorage",
-            "storage",
-            "<all_urls>",
-            "webRequest",
-            "webRequestBlocking"
-        ],
-        "background": {
-            "scripts": ["background.js"]
+        options1 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
         }
-    }
-    """
-    background_js = f"""
-    var config = {{
-        mode: "fixed_servers",
-        rules: {{
-            singleProxy: {{
-                scheme: "http",
-                host: "{proxy_host}",
-                port: parseInt({proxy_port})
-            }},
-            bypassList: ["localhost"]
-        }}
-    }};
 
-    chrome.proxy.settings.set({{value: config, scope: "regular"}}, function(){{}});
+        options2 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
+        }
 
-    function callbackFn(details) {{
-        return {{
-            authCredentials: {{
-                username: "{proxy_user}",
-                password: "{proxy_pass}"
-            }}
-        }};
-    }}
+        options3 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
+        }
 
-    chrome.webRequest.onAuthRequired.addListener(
-        callbackFn,
-        {{urls: ["<all_urls>"]}},
-        ['blocking']
-    );
-    """
+        options4 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
+        }
 
-    plugin_path = tempfile.mktemp(suffix=".zip")
-    with zipfile.ZipFile(plugin_path, 'w') as zp:
-        zp.writestr("manifest.json", manifest_json)
-        zp.writestr("background.js", background_js)
+        options5 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
+        }
 
-    return plugin_path
+        options6 = {
+            'proxy': {
+                'http': f'http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'https': f'https://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}',
+                'no_proxy': 'localhost,127.0.0.1'
+            }
+        }
 
-def navegador_loop(proxy_data, index):
-    proxy_host, proxy_port, proxy_user, proxy_pass = proxy_data
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("mobileEmulation", {"deviceName": "iPhone X"})
 
-    while True:
-        user_data_dir = tempfile.mkdtemp()
-        extension_path = criar_extensao_proxy(proxy_host, proxy_port, proxy_user, proxy_pass)
-
-        chrome_options = Options()
-        chrome_options.add_extension(extension_path)
-        chrome_options.add_argument(f"--user-data-dir={user_data_dir}")
-        chrome_options.add_argument("--no-sandbox")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-
-        # Emula mobile com chance de 66%
-        if random.randint(1, 3) != 1:
-            mobile_emulation = {"deviceName": "iPhone X"}
-            chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
-
-        driver = webdriver.Chrome(options=chrome_options)
-        driver.set_window_size(400, 800)
-
+        
         try:
-            driver.get("https://www.facebook.com/61566807274239/posts/122147574176560242/")
-            wait = WebDriverWait(driver, 15)
+            driver1 = webdriver.Chrome(seleniumwire_options=options1, options=chrome_options)
+            driver1.set_window_size(400, 500)
+            driver1.set_window_position(0, 0)
+            driver1.get("https://dicasdodi.com/cartao-unicred-como-funciona-beneficios-e-como-solicitar-o-seu/?fbclid=IwY2xjawJkGUpleHRuA2FlbQIxMAABHjLXs-4klaLAinvQO_8Yo8Ewsie2Ei41q2_wxbbDFQ2KvSxdirouGvwJ-NC9_aem_IksX6z9k1CoKMLw7Qn6Xzg")
+            
+            
+            clica_anuncio = random.randint(1,1)
+            if clica_anuncio == 1:
+                print('anuncio sendo clicado')
+                tipo_anuncio = random.randint(1,2)  
+                if tipo_anuncio == 1:  
+                    #anuncio 2
+                    print('Anuncio 1')
+                    driver1.execute_script("window.scrollBy(0, 30);")
+                    time.sleep(0.3)
+                    driver1.execute_script("window.scrollBy(0, 30);")
+                    time.sleep(0.3)
+                    driver1.execute_script("window.scrollBy(0, 30);")
+                    time.sleep(0.3)
+                    driver1.execute_script("window.scrollBy(0, 30);")
+                    time.sleep(0.3)
+                    driver1.execute_script("window.scrollBy(0, 30);")
+                    time.sleep(0.3)
+                    driver1.execute_script("window.scrollBy(0, 30);")   
+                    time.sleep(0.3)
+                    
+                pos = driver1.get_window_position()
+                x = pos['x']
+                y = pos['y']
 
-            try:
-                modal = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@aria-label="Fechar"]')))
-                modal.click()
-            except:
-                pass
+                # Pega o tamanho da janela do driver
+                size = driver1.get_window_size()
+                width = size['width']
+                height = size['height']
 
-            time.sleep(2)
+                # Calcula o centro da janela
+                center_x = x + width // 2
+                center_y = y + height // 2
 
-            try:
-                saiba_mais = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="screen-root"]/div/div[3]/div[2]/div/div[3]/div/div[3]/div/div[4]/div')))
-                location = saiba_mais.location
-                size = saiba_mais.size
-                x = location['x'] + size['width'] // 2
-                y = location['y'] + size['height'] // 2
+                # Move o mouse até o centro da janela com animação
+                print('movendo')
+                pyautogui.moveTo(center_x, center_y, duration=0.3)
+                pyautogui.click()
 
-                with mouse_lock:
-                    pyautogui.moveTo(x, y, duration=1)
-                    time.sleep(0.5)
-                    saiba_mais.click()
-                    print(f"[Bot-{index}] Clicou em 'Saiba mais'")
+                print('Clicou anuncio')
 
-            except Exception as e:
-                print(f"[Bot-{index}] Erro no clique: {e}")
-                driver.quit()
-                shutil.rmtree(user_data_dir)
-                continue
-
-            time.sleep(3)
-            if len(driver.window_handles) > 1:
-                driver.switch_to.window(driver.window_handles[-1])
-
-            wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-
-            for _ in range(15):
-                driver.execute_script("window.scrollBy(0, 100);")
+                driver1.execute_script("window.scrollBy(0, 30);")
+                print('lendo anuncio')
+                time.sleep(0.3)
+                driver1.execute_script("window.scrollBy(0, 30);")
+                time.sleep(0.3)
+                driver1.execute_script("window.scrollBy(0, 30);")
+                time.sleep(0.3)
+                driver1.execute_script("window.scrollBy(0, 30);")
+                time.sleep(0.3)
+                driver1.execute_script("window.scrollBy(0, 30);")
+                time.sleep(0.3)
+                driver1.execute_script("window.scrollBy(0, 30);")   
                 time.sleep(0.3)
 
-            if random.randint(1, 3) == 1:
-                abas_iniciais = set(driver.window_handles)
+                time.sleep(1)  # espera a aba carregar
 
-                for _ in range(15):
-                    if set(driver.window_handles) - abas_iniciais:
-                        break
-                    driver.execute_script(f"window.scrollBy(0, -{random.randint(50, 300)});")
-                    time.sleep(0.5)
+                # Fecha a aba (Ctrl + W)
+                pyautogui.hotkey('ctrl', 'w')
+                print('Aba fechada')    
 
-                    x = random.randint(100, 300)
-                    y = random.randint(200, 600)
-                    with mouse_lock:
-                        pyautogui.moveTo(x, y, duration=0.3)
-                        pyautogui.click()
+            time.sleep(1)
 
-                time.sleep(random.randint(3, 8))
-                with mouse_lock:
-                    if platform.system() == "Darwin":
-                        pyautogui.hotkey('command', 'w')
-                    else:
-                        pyautogui.hotkey('ctrl', 'w')
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
+            driver1.execute_script("window.scrollBy(0, 30);")   
+            time.sleep(0.3)
 
-            time.sleep(2)
+            time.sleep(1)
+            driver1.quit()
+            continue
 
         except Exception as e:
-            print(f"[Bot-{index}] Erro geral: {e}")
-
-        finally:
-            driver.quit()
-            shutil.rmtree(user_data_dir)
-            print(f"[Bot-{index}] Reiniciando...")
-
-def main():
-    threads = []
-    for i in range(4):
-        t = threading.Thread(target=navegador_loop, args=(proxies[i], i + 1))
-        t.start()
-        threads.append(t)
-        time.sleep(1)  # evitar sobrecarga inicial
-
-    for t in threads:
-        t.join()
-
-if __name__ == "__main__":
-    main()
+            print(e)  
+    except Exception as e:
+            print(e)          
