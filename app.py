@@ -70,6 +70,7 @@ while True:
 
     def bot1():
       while True:
+        driver1 = None  # define antes do try
         try:
           driver1 = webdriver.Chrome(seleniumwire_options=options1, options=chrome_options)
           driver1.set_window_size(400, 500)
@@ -181,6 +182,7 @@ while True:
 
     def bot2():
       while True:
+        driver2 = None  # define antes do try
         try:
           driver2 = webdriver.Chrome(seleniumwire_options=options2, options=chrome_options)
           driver2.set_window_size(400, 500)
@@ -289,6 +291,7 @@ while True:
 
     def bot3():  
       while True:
+        driver3 = None  # define antes do try
         try:
           driver3 = webdriver.Chrome(seleniumwire_options=options3, options=chrome_options)
           driver3.set_window_size(400, 500)
@@ -396,6 +399,7 @@ while True:
         driver3.quit()
 
     def bot4():  
+      driver4 = None  # define antes do try
       while True:
         try:
           driver4 = webdriver.Chrome(seleniumwire_options=options4, options=chrome_options)
@@ -504,6 +508,7 @@ while True:
         driver4.quit()
 
     def bot5(): 
+      driver5 = None  # define antes do try
       while True:
         try: 
           driver5 = webdriver.Chrome(seleniumwire_options=options5, options=chrome_options)
@@ -612,6 +617,7 @@ while True:
         driver5.quit()
 
     def bot6():  
+      driver6 = None  # define antes do try
       while True:
         try: 
           driver6 = webdriver.Chrome(seleniumwire_options=options6, options=chrome_options)
